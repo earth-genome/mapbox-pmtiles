@@ -1,6 +1,6 @@
 {
   "name": "@earthgenome/mapbox-pmtiles",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Render PMTiles vector & raster sources in Mapbox GL JS — with first-class, framework-agnostic React helpers for react-map-gl and vanilla Mapbox apps.",
   "type": "module",
   "license": "MIT",
