@@ -365,10 +365,14 @@ export class PmTilesSource extends VectorTileSourceImpl {
             break;
         }
 
-        if (
-          this.tileType === TileType.Jpeg ||
-          this.tileType === TileType.Png
-        ) {
+        const rasterTileTypes: TileType[] = [
+          TileType.Png,
+          TileType.Jpeg,
+          TileType.Webp,
+          TileType.Avif,
+        ];
+
+        if (rasterTileTypes.includes(this.tileType)) {
           this.loadTile = this.loadRasterTile;
           this.type = 'raster';
         } else if (this.tileType === TileType.Mvt) {
@@ -513,7 +517,7 @@ export class PmTilesSource extends VectorTileSourceImpl {
         tile.setExpiryData({ cacheControl, expires });
 
       const blob = new window.Blob([new Uint8Array(data)], {
-        type: 'image/png',
+        type: this.contentType || 'image/png',
       });
       window
         .createImageBitmap(blob)

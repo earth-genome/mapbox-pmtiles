@@ -1,0 +1,65 @@
+name: Deploy example to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Allow the workflow to publish to GitHub Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One concurrent deployment; let in-progress runs finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: examples/package-lock.json
+
+      - name: Install
+        working-directory: examples
+        run: npm ci
+
+      - name: Build
+        working-directory: examples
+        # GitHub Pages project sites are served from /<repo>/.
+        # VITE_MAPBOX_TOKEN is optional: set a repo secret named MAPBOX_TOKEN to
+        # render on a Mapbox basemap; without it the demo runs token-free.
+        env:
+          BASE_PATH: /${{ github.event.repository.name }}/
+          VITE_MAPBOX_TOKEN: ${{ secrets.MAPBOX_TOKEN }}
+        run: npm run build
+
+      - name: Add SPA + Jekyll-bypass files
+        working-directory: examples/dist
+        # 404.html makes hash-based deep links resilient; .nojekyll stops Pages
+        # from mangling files that start with an underscore.
+        run: |
+          cp index.html 404.html
+          touch .nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: examples/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

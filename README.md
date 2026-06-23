@@ -16,6 +16,14 @@ with first-class, framework-agnostic React helpers.
 > Built on the excellent [`mapbox-pmtiles`](https://github.com/am2222/mapbox-pmtiles)
 > source, repackaged for TypeScript and React.
 
+## Live demo
+
+See every rendering mode running side by side, each with its source code:
+**[earthgenome.github.io/mapbox-pmtiles](https://earthgenome.github.io/mapbox-pmtiles/)**.
+
+The demo's source lives in [`examples/`](./examples) — a Vite app you can run
+locally with `npm run dev`.
+
 ## Installation
 
 ```bash

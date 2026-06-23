@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "types": ["vite/client", "node"],
+    "paths": {
+      "@earthgenome/mapbox-pmtiles": ["../src/index.ts"],
+      "@earthgenome/mapbox-pmtiles/react": ["../src/react/index.ts"],
+      "@earthgenome/mapbox-pmtiles/react-map-gl": ["../src/react-map-gl/index.ts"]
+    }
+  },
+  "include": ["src", "vite.config.ts"]
+}
