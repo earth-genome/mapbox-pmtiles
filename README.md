@@ -19,7 +19,7 @@ with first-class, framework-agnostic React helpers.
 ## Live demo
 
 See every rendering mode running side by side, each with its source code:
-**[earthgenome.github.io/mapbox-pmtiles](https://earthgenome.github.io/mapbox-pmtiles/)**.
+**[earth-genome.github.io/mapbox-pmtiles](https://earth-genome.github.io/mapbox-pmtiles/)**.
 
 The demo's source lives in [`examples/`](./examples) — a Vite app you can run
 locally with `npm run dev`.
